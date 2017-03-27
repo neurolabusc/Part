@@ -1,0 +1,15 @@
+1 encephalon
+2 gyrus frontalis L
+3 gyrus frontalis R
+4 gyrus proreus L
+5 gyrus proreus R
+6 gyrus compositus rostralis L
+7 gyrus compositus rostralis R
+8 gyrus precruciatus L
+9 gyrus precruciatus R
+10 gyrus postcruciatus L
+11 gyrus postcruciatus R
+12 gyrus marginalis L
+13 gyrus marginalis R
+14 gyrus ectomarginalis L
+15 gyrus ectomarginalis R
