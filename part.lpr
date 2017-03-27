@@ -14,12 +14,16 @@ const
    kDefaultBins = 20;
 procedure WriteHelp;
 var
-  E: string;
+  E, B: string;
 begin
-  { add your help code here }
+  {$IFDEF CPU64}
+  B := '64-bit';
+  {$ELSE}
+  B := '32-bit';
+  {$ENDIF}
   E := extractfilename(ParamStr(0));
   writeln('Usage: ',E,'[options] input.nii');
-  writeln('Version: '+kVers+' by Chris Rorden');
+  writeln('Version: '+kVers+' by Chris Rorden '+B);
   writeln(' Uses Siemens PULS/RESP data to remove variance in NIfTI images.');
   writeln(' For details, see Deckers et al (2006) www.pubmed.com/17011214.');
   writeln('Options:');
@@ -195,4 +199,4 @@ begin
     WriteHelp
   else
   	  ProcessParamStr;
-end.
+end.

@@ -21,6 +21,13 @@ lazbuild -B part.lpr
 lazbuild -B perfx.lpr
 ```
 
+With MacOS, lazbuild will compile as a 32-bit executable. For very large datasets you may want to explicitly compile the software as a 64-bit executable:
+
+```
+lazbuild --cpu=x86_64 -B part.lpr
+lazbuild --cpu=x86_64 -B perfx.lpr
+
+```
 
 ##### License
 

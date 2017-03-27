@@ -128,11 +128,16 @@ MinR2:single;
 AIFVox,MaskVox,SliceTimeCorrect,DeleteVols,BaselineVols,FinalVol: integer;
 AIFpeak,MotionCorrect,BrainExtract,PreMask,ComputeRaw,ComputeFitted,ConvertToConcentrationTime,Normalize: boolean;  *)
 var
-  E,I: string;
+  B, E,I: string;
 begin
+  {$IFDEF CPU64}
+  B := '64-bit';
+  {$ELSE}
+  B := '32-bit';
+  {$ENDIF}
   E := extractfilename(ParamStr(0));
   writeln('Usage: ',E,'[options] input.nii');
-  writeln('Version: '+kVers+' by Chris Rorden');
+  writeln('Version: '+kVers+' by Chris Rorden '+B);
   writeln('Options:');
   //writeln(' -a Arterial input voxels (default '+inttostr(Opts.AIFVox)+')');
   writeln(' -b Brain extraction (uses fsl, default '+Bool2Char(Opts.BrainExtract)+')');
