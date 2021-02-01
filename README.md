@@ -110,6 +110,43 @@ Triggers n/First…Last [vol] 229.00/0.05..346.72
  Physiological Artifact Removal Tool finished = 10:03:16 AM
 ```
 
+#####  Perfx: A perfusion estimation tool
+
+This repository also includes the Perfusion-weighted imaging (PWI) [described here](https://crnl.readthedocs.io/pwi/index.html). This project is largely undocumented and not thoroughly tested. Since it is open source, you can extend it as you wish.
+
+Compiling and running Perfx. The commands below assume you have the [Lazarus lazbuild command](https://www.lazarus-ide.org) in your path. Running the program without any arguments generates some description regarding usage:
+
+```
+$git clone https://github.com/neurolabusc/Part.git
+$cd Part
+$lazbuild -B perfx.lpr
+$./perfx
+
+Version: 14 Feb 2015 by Chris Rorden 64-bit
+Options:
+ -b Brain extraction (uses fsl, default 1)
+ -d Delete volumes from start (default 1)
+ -f Final volume (default 42)
+ -g Gaussian smooth (FWHM in mm, default 2.35, 0 for none)
+ -h Help (show these instructions)
+ -i Initial baseline volumes (default 5)
+ -m Mask threshold for brain (StDev, default 2.80)
+ -n Normalize (uses fsl, default 0)
+ -r Realign to correct for motion (uses fsl, default 1)
+ -s Slice order (default -1, AutoDetect=-1 Instant(Skip)=0 AscSeq=1 AscInt=2 DescSeq=3 DescInt=4 AscInt2,4,1,3=5 DescInt3,1,4,2=6
+ -t TR in seconds (default 0.000, if zero uses TR from input.nii's header)
+ -z temporal filter (FWHM in sec, default 3.530, zero to skip)
+Examples:
+ perfx ~/folder/p1.nii
+  Process ~/folder/p1.nii with default parameters
+ perfx -b 0 -n 0 -r 0  ~/folder/p1.nii
+  Process ~/folder/p1.nii without using FSL (e.g. SPM used to normalize and realign)
+ perfx -e 28 -t 2.8 -s 1 ~/folder/p1.nii
+  Process ~/folder/p1.nii with TE=28ms, TR=2800ms, ascending sequential slice order
+ perfx '~/my folder/my img.nii'
+  Process '~/my folder/my img.nii' with default parameters (spaces in folder or filename)
+```
+
 #####  Notes
 
 Ensure that your fMRI protocol has been adapted to save physiological data. On the Siemens Trio TIM system, use the wireless finger clip to record pulse data – the laser light should illuminate the proximal portion of the finger nail (not the finger pad, as claimed in the manual), while you can record respiration with the respiration cushion (use the velcro chest strap to hold the cushion snug, but loose enough that the cushion expands and contracts with each breath). For details on how to collect physio files manually with a Siemens scanner see the  [Aguirre lab webpage](https://cfn.upenn.edu/aguirre/wiki/public:pulse-oximetry_during_fmri_scanning), though I suggest recompiling your sequences to automatically start and stop recording (this saves the hassle of having to do this manually for every participant, and also ensures that the log files have near optimal start and end times). In either case, the resulting log files saved in c:\medcom\log (you will need to activate advanced user mode to view, copy and delete these files). I do not have Achieva datasets, so my current version of PART does not support Philips scanners (though it is a simple format, and support would be easy to add). For notes on recording physio data with the Achieva see the [Dartmouth Brain Imaging Center](https://dbic.dartmouth.edu/wiki/index.php/Recording_Physiology)
